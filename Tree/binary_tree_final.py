@@ -1,3 +1,5 @@
+# @Author YoungMinKim
+# Data Structure - Binary Tree
 MAX_QSIZE = 10
 class CircleQueue: # 원형큐
     
