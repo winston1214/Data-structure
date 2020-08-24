@@ -1,8 +1,8 @@
 # @Author YoungMinKim
-# Data structure - Queue
-# 원형큐
+# Data Structure - binary Tree Function - LevelOrder
+
 MAX_QSIZE = 10
-class CircleQueue: # 원형으로 움직이는 큐
+class CircleQueue: # 원형큐
     
     def __init__(self):
         self.front=0
@@ -34,14 +34,27 @@ class CircleQueue: # 원형으로 움직이는 큐
         else:
             out = self.items[self.front+1:MAX_QSIZE] + self.items[0:self.rear+1]
         print('f={},r={}'.format(self.front,self.rear),out)
+class TNode:
+    def __init__(self,data,left,right):
+        self.data = data
+        self.left = left
+        self.right = right
+def levelorder(root): # 레벨순회 - 원형큐로 구현
+    queue = CircleQueue()
+    queue.enqueue(root)
+    while not queue.isEmpty(): # 큐가 공백상태가 아닌 동안
+        n = queue.dequeue() # 큐에서 맨 앞의 노드 n을 꺼낸다
+        if n is not None:
+            print(n.data,end='')
+            queue.enqueue(n.left)
+            queue.enqueue(n.right)
 
-q = CircleQueue()
-for i in range(8):
-    q.enqueue(i)
-q.display()
-for i in range(5):
-    q.dequeue()
-q.display()
-for i in range(8,14):
-    q.enqueue(i)
-q.display()
+d=TNode('D',None,None)
+e=TNode('E',None,None)
+b=TNode('B',d,e)
+f=TNode('F',None,None)
+c=TNode('C',f,None)
+root = TNode('A',b,c)
+
+print('Level-order: ',end='')
+levelorder(root)
